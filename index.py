@@ -10,7 +10,7 @@ from urllib import urlencode
 
 API_URL = 'http://ajax.googleapis.com/ajax/services/search/web?v=1.0&%s'
 
-# Redirect response stolen from Google
+# Redirect response HTML stolen from Google
 REDIRECT_TEMPLATE = """
 <HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
 <TITLE>302 Moved</TITLE></HEAD><BODY>
@@ -21,25 +21,31 @@ The document has moved
 """.strip()
 
 INFO_TEMPLATE = """
-<HTML><HEAD><meta http-equiv="content-type" content="text/html;charset=utf-8">
-<TITLE>302Found - Simple Redirection</TITLE></HEAD><BODY>
+<head><meta http-equiv="content-type" content="text/html;charset=utf-8">
+<title>302Found - Simple Redirection</title>
+</head><body>
 
-<H1>Improved <EM>I'm Feeling Lucky</EM></H1>
-<P>Query Google and redirect to the first result. Doesn't discriminate by the referrer, even when there's few results (unlike Google). If no results are found, <CODE>fallback</CODE> is used.</P>
-<FORM METHOD="GET" ACTION="/">
-    Query: <INPUT TYPE="text" NAME="q" /><BR />
-    Fallback (Optional): <INPUT TYPE="text" NAME="fallback" /><BR />
-    <INPUT TYPE="submit" value="I'm Feeling Lucky" />
-</FORM>
+<h1>Improved <em>I'm Feeling Lucky</em></h1>
+<p>Query Google and redirect to the first result. Doesn't discriminate by the referrer, even when there's few results (unlike Google). If no results are found, <code>fallback</code> is used.</p>
+<form method="get" action="/">
+    Query: <input name="q" type="text" /><br />
+    Fallback (Optional): <input name="fallback" type="text" /><br />
+    <input value="I'm Feeling Lucky" type="submit" />
+</form>
 
-<H1>URL Redirect</H1>
-<P>Great for hiding the referrer.</P>
-<FORM METHOD="GET" ACTION="/">
-    URL: <INPUT TYPE="text" NAME="url"><BR />
-    <INPUT TYPE="submit" value="Redirect" />
-</FORM>
+<h1>URL Redirect</h1>
+<p>Great for hiding the referrer.</p>
+<form method="get" action="/">
+    URL: <input name="url" type="text" /><br />
+    <input value="Redirect" type="submit" />
+</form>
 
-</BODY></HTML>
+<p>
+The source code for this app is available on github: <a href="http://github.com/shazow/302found">http://github.com/shazow/302found</a>
+</p>
+
+</body>
+</html>
 """.strip()
 
 class Redirector(webapp.RequestHandler):
