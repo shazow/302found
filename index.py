@@ -51,7 +51,7 @@ The source code for this app is available on github: <a href="http://github.com/
 class Redirector(webapp.RequestHandler):
     def _first_google(self, q):
         "Query Google for ``q``, return the first result if there is one."
-        params = {'q': q, 'rsz': 'small'}
+        params = {'q': q.encode('utf-8'), 'rsz': 'small'}
         url = API_URL % urlencode(params)
 
         # Query Google
